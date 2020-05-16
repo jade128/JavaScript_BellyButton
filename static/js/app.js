@@ -29,9 +29,9 @@ function barChart(data) {
     // Sort function of objects by samples values in array 
     console.log(list.sort((a, b) => parseInt(b.sample_values) - parseInt(a.sample_values)));
 
-    let otu_ids = list.slice(0,10).map(record => "OTU " + record.otu_ids.toString());
-    let values = list.slice(0,10).map(record => record.sample_values);
-    let otu_labels = list.slice(0,10).map(record =>  record.otu_labels );
+    var otu_ids = list.slice(0,10).map(record => "OTU " + record.otu_ids.toString());
+    var values = list.slice(0,10).map(record => record.sample_values);
+    var otu_labels = list.slice(0,10).map(record =>  record.otu_labels );
 
     var trace1 = [{
       x: values,
@@ -56,13 +56,13 @@ function barChart(data) {
  
 
 function bubbleChart(data) {
-  let x = data.otu_ids;
-  let y = data.sample_values;
-  let markersize = data.sample_values;
-  let markercolors = data.otu_ids;
-  let textvalues = data.otu_labels;
+  var x = data.otu_ids;
+  var y = data.sample_values;
+  var markersize = data.sample_values;
+  var markercolors = data.otu_ids;
+  var textvalues = data.otu_labels;
 
-  let trace1 =[{
+  var trace1 =[{
     x: x,
     y: y,
     mode: 'markers',
@@ -73,7 +73,7 @@ function bubbleChart(data) {
     text: textvalues
   }];
 
-  let layout ={
+  var layout ={
     title:"<b> Belly Button Bubble Chart </b>",
     xaxis: {
       title: 'OTU ID',
@@ -81,6 +81,7 @@ function bubbleChart(data) {
     yaxis: {
       title: 'Sample Value'
     },
+    height: 700,
     width:1300,
     plot_bgcolor: 'rgba(0, 0, 0, 0)',
     paper_bgcolor: 'rgba(0, 0, 0, 0)',
@@ -94,11 +95,12 @@ function bubbleChart(data) {
 function buildCharts(sample) {
 
     d3.json(`./data/samples.json`).then ( dataS =>{
-        var wdata=dataS.metadata.filter(samples => samples.id==sample );
+      var wdata=dataS.metadata.filter(samples => samples.id==sample );
       // ## Gauge Chart ##
-      gaugeChart(wdata[0])
+      console.log(wdata);  
+      gaugeChart(wdata[0]);
     });
-
+  
     d3.json(`./data/samples.json`).then( dataS =>{
       var data=dataS.samples.filter(samples => samples.id==sample );
     
@@ -127,17 +129,17 @@ function init() {
     });
 
     // Use the first sample from the list to build the initial plots
-    const firstSample = sampleNames[0];
-    buildCharts(firstSample);
-    buildMetadata(firstSample);
+    const sample1 = sampleNames[0];
+    buildCharts(sample1);
+    buildMetadata(sample1);
   });
 }
 
-function optionChanged(newSample) {
+function optionChanged(sampleN) {
   // Fetch new data each time a new sample is selected
 
-  buildCharts(newSample);
-  buildMetadata(newSample);
+  buildCharts(sampleN);
+  buildMetadata(sampleN);
 
 }
 
