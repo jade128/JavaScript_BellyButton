@@ -96,7 +96,7 @@ function buildCharts(sample) {
 
     d3.json(`./data/samples.json`).then ( dataS =>{
       var wdata=dataS.metadata.filter(samples => samples.id==sample );
-      // ## Gauge Chart ##
+      // Gauge Chart 
       console.log(wdata);  
       gaugeChart(wdata[0]);
     });
@@ -104,9 +104,9 @@ function buildCharts(sample) {
     d3.json(`./data/samples.json`).then( dataS =>{
       var data=dataS.samples.filter(samples => samples.id==sample );
     
-      // ## bar Chart ##
+      //  bar Chart 
       barChart(data[0]);
-      // ## Bubble Chart ##
+      //  Bubble Chart 
       bubbleChart(data[0]);
     });
 
