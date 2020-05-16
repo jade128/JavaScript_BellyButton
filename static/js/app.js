@@ -81,7 +81,7 @@ function bubbleChart(data) {
     yaxis: {
       title: 'Sample Value'
     },
-    height: 700,
+    height: 00,
     width:1300,
     plot_bgcolor: 'rgba(0, 0, 0, 0)',
     paper_bgcolor: 'rgba(0, 0, 0, 0)',
